@@ -1,3 +1,9 @@
+const initialFormValues = {
+  item: "",
+  completed: "",
+  id: ""
+};
+
 export const initialState = {
   todos: [
     {
@@ -6,15 +12,11 @@ export const initialState = {
       id: 3892987589
     }
   ],
-  formValues: {
-    item: "",
-    completed: "",
-    id: ""
-  }
+  formValues: initialFormValues,
 };
 
 export const ON_INPUT_CHANGE = "ON_INPUT_CHANGE";
-const ON_SUBMIT = "ON_SUBMIT";
+export const ON_SUBMIT = "ON_SUBMIT";
 
 export function reducer(state, action) {
   switch (action.type) {
@@ -27,6 +29,11 @@ export function reducer(state, action) {
           id: Date.now()
         }
       };
+    case ON_SUBMIT:
+      return {
+        todos: state.todos.concat(state.formValues),
+        formValues: initialFormValues,
+      }
     default:
       return state;
   }
